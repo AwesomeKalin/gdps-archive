@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "gdps-archive"
+version = "0.1.0"
+description = ""
+authors = ["AwesomeKalin <47223207+AwesomeKalin@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+internetarchive = "^3.5.0"
+gd-py = "^1.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
