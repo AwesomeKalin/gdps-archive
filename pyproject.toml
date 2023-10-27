@@ -9,6 +9,8 @@ readme = "README.md"
 python = "^3.10"
 internetarchive = "^3.5.0"
 gd-py = "^1.0.1"
+fastapi = "^0.104.0"
+lxml = "^4.9.3"
 
 
 [build-system]
