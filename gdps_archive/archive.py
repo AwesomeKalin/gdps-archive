@@ -19,15 +19,16 @@ async def archive(level, client):
     if item.exists:
         return False
     
+    lvl = None
+    
     print('Archiving Level ' + str(level))
     try:
-        print()
+        lvl = await client.get_level(level_id=level)
 
     except:
         print('Level does not exist or archiving failed')
         return False
     
-    lvl = await client.get_level(level_id=level)
     file = open(expanduser("~") + '/.gdpsarchive/' + str(level) + '.gd', "w")
     file.write(lvl.unprocessed_data)
     print('Downloaded Level, starting archive')
