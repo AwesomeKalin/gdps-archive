@@ -36,7 +36,8 @@ async def archive(level, client):
 
     if lvl.song.download_url == None or 'newgrounds' in lvl.song.download_url or item.exists:
         return True
-        
+
+    lvl = await client.get_level(level_id=level)   
     print('Archiving Song ID ' + str(lvl.song.id))
     urllib.request.urlretrieve(lvl.song.download_url, expanduser("~") + '/.gdpsarchive/' + str(lvl.song.id) + '.mp3')
     print('Downloaded Song, Archiving')
