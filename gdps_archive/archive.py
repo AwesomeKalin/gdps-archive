@@ -6,7 +6,7 @@ from os import remove
 import urllib.request
 
 async def main(client):
-    levelId: int = 11
+    levelId: int = 31
 
     print('Starting archive from id ' + str(levelId))
 
@@ -29,19 +29,20 @@ async def archive(level, client):
         print('Level ID ' + level + ' is archived!')
         remove(str(level), expanduser("~") + '/.gdpsarchive/' + str(level) + '.gd')
 
-        item: internetarchive.Item = internetarchive.get_item('gdps-2.2-song-' + str(lvl.song.id))
-
-        if lvl.song.download_url == None or 'newgrounds' in lvl.song.download_url or item.exists:
-            return True
-        
-        print('Archiving Song ID ' + str(lvl.song.id))
-        urllib.request.urlretrieve(lvl.song.download_url, expanduser("~") + '/.gdpsarchive/' + str(lvl.song.id) + '.mp3')
-        print('Downloaded Song, Archiving')
-        internetarchive.upload('gdps-2.2-song-' + str(lvl.song.id), expanduser("~") + '/.gdpsarchive/' + str(lvl.song.id) + '.mp3', metadata={'creator': lvl.song.artist, 'scanner': 'GDPS Editor 2.2 Archiver', 'title': lvl.song.name, 'subject': 'gdps;geometry dash;2.2;gdps editor 2.2;gdps editor;song', 'description': 'A song archive from the GDPS Editor 2.2 Reupload System. Originally archived for Level ID ' + level})
-        print('Archiving successful!')
-
     except:
         print('Level does not exist or archiving failed')
+
+    item: internetarchive.Item = internetarchive.get_item('gdps-2.2-song-' + str(lvl.song.id))
+
+    if lvl.song.download_url == None or 'newgrounds' in lvl.song.download_url or item.exists:
+        return True
+        
+    print('Archiving Song ID ' + str(lvl.song.id))
+    urllib.request.urlretrieve(lvl.song.download_url, expanduser("~") + '/.gdpsarchive/' + str(lvl.song.id) + '.mp3')
+    print('Downloaded Song, Archiving')
+    internetarchive.upload('gdps-2.2-song-' + str(lvl.song.id), expanduser("~") + '/.gdpsarchive/' + str(lvl.song.id) + '.mp3', metadata={'creator': lvl.song.artist, 'scanner': 'GDPS Editor 2.2 Archiver', 'title': lvl.song.name, 'subject': 'gdps;geometry dash;2.2;gdps editor 2.2;gdps editor;song', 'description': 'A song archive from the GDPS Editor 2.2 Reupload System. Originally archived for Level ID ' + level})
+    print('Archiving successful!')
+    remove(expanduser("~") + '/.gdpsarchive/' + str(lvl.song.id) + '.mp3')
     
 client = gd.Client()
 
