@@ -33,7 +33,7 @@ async def archive(level, client):
     file.write(lvl.unprocessed_data)
     print('Downloaded Level, starting archive')
     internetarchive.upload('gdps-2.2-level-' + str(level), expanduser("~") + '/.gdpsarchive/' + str(level) + '.gd', metadata={'creator': lvl.creator.name, 'scanner': 'GDPS Editor 2.2 Archiver', 'title': lvl.name, 'subject': 'gdps;geometry dash;2.2;gdps editor 2.2;gdps editor;level', 'description': lvl.description, 'stars': str(lvl.stars), 'difficulty': str(lvl.difficulty.value), 'song': str(lvl.song.id), 'level-id': level})
-    print('Level ID ' + level + ' is archived!')
+    print('Level ID ' + str(level) + ' is archived!')
 
     item: internetarchive.Item = internetarchive.get_item('gdps-2.2-song-' + str(lvl.song.id))
 
