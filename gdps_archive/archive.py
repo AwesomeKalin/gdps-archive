@@ -31,6 +31,7 @@ async def archive(level, client):
 
     except:
         print('Level does not exist or archiving failed')
+        return False
 
     item: internetarchive.Item = internetarchive.get_item('gdps-2.2-song-' + str(lvl.song.id))
 
