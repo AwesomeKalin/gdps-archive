@@ -21,23 +21,24 @@ async def archive(level, client):
     
     print('Archiving Level ' + str(level))
     try:
-        lvl = await client.get_level(level_id=level)
-        file = open(expanduser("~") + '/.gdpsarchive/' + str(level) + '.gd', "w")
-        file.write(lvl.unprocessed_data)
-        print('Downloaded Level, starting archive')
-        internetarchive.upload('gdps-2.2-level-' + str(level), expanduser("~") + '/.gdpsarchive/' + str(level) + '.gd', metadata={'creator': lvl.creator.name, 'scanner': 'GDPS Editor 2.2 Archiver', 'title': lvl.name, 'subject': 'gdps;geometry dash;2.2;gdps editor 2.2;gdps editor;level', 'description': lvl.description, 'stars': str(lvl.stars), 'difficulty': str(lvl.difficulty.value), 'song': str(lvl.song.id), 'level-id': level})
-        print('Level ID ' + level + ' is archived!')
+        print()
 
     except:
         print('Level does not exist or archiving failed')
         return False
+    
+    lvl = await client.get_level(level_id=level)
+    file = open(expanduser("~") + '/.gdpsarchive/' + str(level) + '.gd', "w")
+    file.write(lvl.unprocessed_data)
+    print('Downloaded Level, starting archive')
+    internetarchive.upload('gdps-2.2-level-' + str(level), expanduser("~") + '/.gdpsarchive/' + str(level) + '.gd', metadata={'creator': lvl.creator.name, 'scanner': 'GDPS Editor 2.2 Archiver', 'title': lvl.name, 'subject': 'gdps;geometry dash;2.2;gdps editor 2.2;gdps editor;level', 'description': lvl.description, 'stars': str(lvl.stars), 'difficulty': str(lvl.difficulty.value), 'song': str(lvl.song.id), 'level-id': level})
+    print('Level ID ' + level + ' is archived!')
 
     item: internetarchive.Item = internetarchive.get_item('gdps-2.2-song-' + str(lvl.song.id))
 
     if lvl.song.download_url == None or 'newgrounds' in lvl.song.download_url or item.exists:
         return True
-
-    lvl = await client.get_level(level_id=level)   
+  
     print('Archiving Song ID ' + str(lvl.song.id))
     urllib.request.urlretrieve(lvl.song.download_url, expanduser("~") + '/.gdpsarchive/' + str(lvl.song.id) + '.mp3')
     print('Downloaded Song, Archiving')
