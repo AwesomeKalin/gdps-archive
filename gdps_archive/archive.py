@@ -38,7 +38,7 @@ async def archive(level, client):
 
     item: internetarchive.Item = internetarchive.get_item('gdps-2.2-song-' + str(lvl.song.id))
 
-    if lvl.song.download_url == None or lvl.song.download_url.human_repr().find('newgrounds') != -1 or item.exists:
+    if lvl.song.download_url == None or ('newgrounds' in lvl.song.download_url.human_repr()) or item.exists:
         return True
   
     print('Archiving Song ID ' + str(lvl.song.id))
