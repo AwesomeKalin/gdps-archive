@@ -26,4 +26,4 @@ jobs:
       - name: Upload file to archive.org
         run: |
           ia configure -u ${{ secrets.IA_USER }} -p ${{ secrets.IA_PWD }}
-          ia upload gdps-archive-${{ github.sha }} gdps-archive-${{ github.sha }}.bundle --metadata="mediatype:software" --metadata="creator:AwesomeKalin55" --metadata="title:gdps-archive-${{ github.sha }}" --metadata="scanner:GDPS 2.2 Archive Auto Code Archive" --metadata="collection:open_source_software" --metadata="subject:gdps;geometry dash;2.2;gdps editor 2.2;gdps editor;level;song" --metadata="originalurl:https://github.com/AwesomeKalin/gdps-archive" --retries 20
+          ia upload gdps-archive-${{ github.sha }} gdps-archive-${{ github.sha }}.bundle --metadata="mediatype:software" --metadata="creator:AwesomeKalin55" --metadata="title:gdps-archive-${{ github.sha }}" --metadata="scanner:GDPS 2.2 Archive Auto Code Archive" --metadata="collection:gdps-editor-2.2" --metadata="subject:gdps;geometry dash;2.2;gdps editor 2.2;gdps editor;level;song" --metadata="originalurl:https://github.com/AwesomeKalin/gdps-archive" --retries 20

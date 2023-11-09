@@ -4,9 +4,10 @@ import internetarchive
 from os.path import expanduser
 from os import remove
 import urllib.request
+import yarl
 
 async def main(client):
-    levelId: int = 50
+    levelId: int = 69
 
     print('Starting archive from id ' + str(levelId))
 
@@ -32,18 +33,18 @@ async def archive(level, client):
     file = open(expanduser("~") + '/.gdpsarchive/' + str(level) + '.gd', "w")
     file.write(lvl.unprocessed_data)
     print('Downloaded Level, starting archive')
-    internetarchive.upload('gdps-2.2-level-' + str(level), expanduser("~") + '/.gdpsarchive/' + str(level) + '.gd', metadata={'creator': lvl.creator.name, 'scanner': 'GDPS Editor 2.2 Archiver', 'title': lvl.name, 'subject': 'gdps;geometry dash;2.2;gdps editor 2.2;gdps editor;level', 'description': lvl.description, 'stars': str(lvl.stars), 'difficulty': str(lvl.difficulty.value), 'song': str(lvl.song.id), 'level-id': level})
+    internetarchive.upload('gdps-2.2-level-' + str(level), expanduser("~") + '/.gdpsarchive/' + str(level) + '.gd', metadata={'creator': lvl.creator.name, 'scanner': 'GDPS Editor 2.2 Archiver', 'title': lvl.name, 'subject': 'gdps;geometry dash;2.2;gdps editor 2.2;gdps editor;level', 'description': lvl.description, 'stars': str(lvl.stars), 'difficulty': str(lvl.difficulty.value), 'song': str(lvl.song.id), 'level-id': level, 'collection': 'gdps-editor-2.2'})
     print('Level ID ' + str(level) + ' is archived!')
 
     item: internetarchive.Item = internetarchive.get_item('gdps-2.2-song-' + str(lvl.song.id))
 
-    if lvl.song.download_url == None or 'newgrounds' in lvl.song.download_url or item.exists:
+    if lvl.song.download_url.human_repr() == None or 'newgrounds' in lvl.song.download_url.human_repr() or item.exists:
         return True
   
     print('Archiving Song ID ' + str(lvl.song.id))
-    urllib.request.urlretrieve(lvl.song.download_url, expanduser("~") + '/.gdpsarchive/' + str(lvl.song.id) + '.mp3')
+    urllib.request.urlretrieve(lvl.song.download_url.human_repr(), expanduser("~") + '/.gdpsarchive/' + str(lvl.song.id) + '.mp3')
     print('Downloaded Song, Archiving')
-    internetarchive.upload('gdps-2.2-song-' + str(lvl.song.id), expanduser("~") + '/.gdpsarchive/' + str(lvl.song.id) + '.mp3', metadata={'creator': lvl.song.artist, 'scanner': 'GDPS Editor 2.2 Archiver', 'title': lvl.song.name, 'subject': 'gdps;geometry dash;2.2;gdps editor 2.2;gdps editor;song', 'description': 'A song archive from the GDPS Editor 2.2 Reupload System. Originally archived for Level ID ' + level, 'collection': 'audio_music', 'mediatype': 'audio'})
+    internetarchive.upload('gdps-2.2-song-' + str(lvl.song.id), expanduser("~") + '/.gdpsarchive/' + str(lvl.song.id) + '.mp3', metadata={'creator': lvl.song.artist, 'scanner': 'GDPS Editor 2.2 Archiver', 'title': lvl.song.name, 'subject': 'gdps;geometry dash;2.2;gdps editor 2.2;gdps editor;song', 'description': 'A song archive from the GDPS Editor 2.2 Reupload System. Originally archived for Level ID ' + level, 'collection': 'gdps-editor-2.2', 'mediatype': 'audio'})
     print('Archiving successful!')
     remove(expanduser("~") + '/.gdpsarchive/' + str(lvl.song.id) + '.mp3')
     
