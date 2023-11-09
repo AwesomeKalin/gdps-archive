@@ -44,7 +44,7 @@ async def archive(level, client):
     print('Archiving Song ID ' + str(lvl.song.id))
     urllib.request.urlretrieve(lvl.song.download_url.human_repr(), expanduser("~") + '/.gdpsarchive/' + str(lvl.song.id) + '.mp3')
     print('Downloaded Song, Archiving')
-    internetarchive.upload('gdps-2.2-song-' + str(lvl.song.id), expanduser("~") + '/.gdpsarchive/' + str(lvl.song.id) + '.mp3', metadata={'creator': lvl.song.artist.song, 'scanner': 'GDPS Editor 2.2 Archiver', 'title': lvl.song.name, 'subject': 'gdps;geometry dash;2.2;gdps editor 2.2;gdps editor;song', 'description': 'A song archive from the GDPS Editor 2.2 Reupload System. Originally archived for Level ID ' + str(level), 'collection': 'gdps-editor-2.2', 'mediatype': 'audio'})
+    internetarchive.upload('gdps-2.2-song-' + str(lvl.song.id), expanduser("~") + '/.gdpsarchive/' + str(lvl.song.id) + '.mp3', metadata={'creator': lvl.song.artist.name, 'scanner': 'GDPS Editor 2.2 Archiver', 'title': lvl.song.name, 'subject': 'gdps;geometry dash;2.2;gdps editor 2.2;gdps editor;song', 'description': 'A song archive from the GDPS Editor 2.2 Reupload System. Originally archived for Level ID ' + str(level), 'collection': 'gdps-editor-2.2', 'mediatype': 'audio'})
     print('Archiving successful!')
     remove(expanduser("~") + '/.gdpsarchive/' + str(lvl.song.id) + '.mp3')
     
